@@ -14,11 +14,11 @@ export const CartSlice = createSlice({
       if (existingItem) {
         existingItem.quantity++;
         state.totalCost += Number(existingItem.cost.substring(1));
-        console.log("total Cost: ", state.totalCost)
+        // console.log("total Cost: ", state.totalCost)
       } else {
         state.items.push({ name, image, cost, quantity: 1 });
         state.totalCost += Number(cost.substring(1));
-        console.log("total Cost: ", state.totalCost)
+        // console.log("total Cost: ", state.totalCost)
       }
       state.totalQuantity++;
       // console.log("total Quantity: ", state.totalQuantity)
@@ -41,7 +41,7 @@ export const CartSlice = createSlice({
         itemToUpdate.quantity = quantity;
         // console.log("updated total Quantity: ", quantity, " ->", state.totalQuantity)
         state.totalCost += Number(itemToUpdate.cost.substring(1)) * adjustQuantity;
-        console.log("total updated Cost: ", state.totalCost)
+        // console.log("total updated Cost: ", state.totalCost)
       }
     },
 
