@@ -25,13 +25,14 @@ export const CartSlice = createSlice({
     },
 
     removeItem: (state, action) => {      
-      // console.log("remove item: ", action.payload);
+      // console.log("remove item: ", action.payload.quantity);
+      state.totalQuantity -= action.payload.quantity;
       state.items = state.items.filter(item => item.name !== action.payload.name);
     },
 
     updateQuantity: (state, action) => {
       const { name, quantity } = action.payload;
-    //   console.log("update Quantity: ", quantity);
+      //   console.log("update Quantity: ", quantity);
       const itemToUpdate = state.items.find(item => item.name === name);
       if (itemToUpdate) {
         // console.log("original total Quantity: ", state.totalQuantity)
@@ -45,6 +46,8 @@ export const CartSlice = createSlice({
     },
 
     clearCart(state) {
+      state.totalCost = 0;
+      state.totalQuantity = 0;
       state.items = [];
     },
 

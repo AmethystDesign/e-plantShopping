@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
-import { CartSlice, addItem } from './CartSlice';
+import { addItem } from './CartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function ProductList() {
   const [showCart, setShowCart] = useState(false); 
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   
-  // const cart = useSelector(state => state.cart.);
-
-  const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
   const plantsArray = [
     {
@@ -241,6 +239,7 @@ function ProductList() {
     color: 'white',
     fontSize: '30px',
     textDecoration: 'none',
+    alignItems: 'center',
    }
 
    const handleCartClick = (e) => {
@@ -256,6 +255,7 @@ function ProductList() {
 
   const handleContinueShopping = (e) => {
     // console.log("handlecContinueShopping ===>")
+    setShowPlants(true);
     setShowCart(false);
   };
 
@@ -267,6 +267,14 @@ function ProductList() {
        ...prevState,
        [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
      }));
+  };
+
+  const itemCount = useSelector(state => state.cart.totalQuantity);
+
+  // Get total quantity for all items
+  const getTotalQuantity = (item) => {
+    const totalQuantity = useSelector(state => state.cart.totalQuantity);
+    return totalQuantity
   };
 
   return (
@@ -291,7 +299,7 @@ function ProductList() {
               <h1 className='cart'>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" id="IconChangeColor" height="68" width="68">
                   <rect width="156" height="156" fill="none"></rect>
-                  <text x="130" y="150" font-size="80" text-anchor="middle" fill="white">23</text>
+                  <text x="130" y="150" font-size="80" text-anchor="middle" fill="white">{getTotalQuantity()}</text>
                   <circle cx="80" cy="216" r="12"></circle>
                   <circle cx="184" cy="216" r="12"></circle>
                   <path 
@@ -321,14 +329,7 @@ function ProductList() {
                     <div className="product-title">{plant.name}</div>
                     {/*Similarly like the above plant.name show other details like description and cost*/}
                     <div className="product-description">{plant.description}</div>
-                    <button 
-                      className="product-button" 
-                      onClick={() => {
-                        if(plant.name)
-                        {
-                           handleAddToCart(plant);
-                        }
-                      }}>Add to Cart</button>
+                    <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
                   </div>
                 ))}
               </div>

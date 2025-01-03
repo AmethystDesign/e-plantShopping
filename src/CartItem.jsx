@@ -6,15 +6,22 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
-  const totalAmount = cart.reduce((total, item) => total + Number(item.cost.substring(1)) * item.quantity, 0);
 
+  // Option 1: 
+  // const totalAmount = cart.reduce((total, item) => total + Number(item.cost.substring(1)) * item.quantity, 0);
+
+  // Option 2:
+  const totalAmount = useSelector(state => state.cart.totalCost);
+ 
   const calculateTotalAmount = () => {
     return totalAmount;
   };
 
+  // Option 2:
+  const totalAmount2 = useSelector(state => state.cart.totalCost);
+
   const handleContinueShopping = (e) => {
     e.preventDefault();
-    setShowProductList(true);
   };
 
   const handleCheckoutShopping = (e) => {
@@ -35,7 +42,7 @@ const CartItem = ({ onContinueShopping }) => {
 
   const handleRemove = (item) => {
     // console.log("remove : ", item.name)
-    dispatch(removeItem({name: item.name}));
+    dispatch(removeItem({name: item.name, quantity: item.quantity}));
   };
 
   const handleClearCart = () => {
@@ -46,7 +53,6 @@ const CartItem = ({ onContinueShopping }) => {
   const calculateTotalCost = (item) => {
     return (Number(item.cost.substring(1)) * item.quantity)
   };
-
 
   return (
     <div className="cart-container">
