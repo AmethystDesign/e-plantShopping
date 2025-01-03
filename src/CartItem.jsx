@@ -21,20 +21,20 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleIncrement = (item) => {
-    const quantity = item.quantity + 1;
-    console.log("Increment: ", item.quantity, quantity);
-    dispatch(updateQuantity(item, quantity));
+    // console.log("Increment: ", item.quantity);
+    dispatch(updateQuantity({name: item.name, quantity: item.quantity + 1}));
   };
 
   const handleDecrement = (item) => {
     if(item.quantity > 0) {
-      const quantity = item.quantity - 1;
-      console.log("Decrement: ", item.quantity, quantity);
-      dispatch(updateQuantity(item, quantity));
+    //   console.log("Decrement: ", item.quantity);
+      dispatch(updateQuantity({name: item.name, quantity: item.quantity - 1}));
     }
   };
 
   const handleRemove = (item) => {
+    // console.log("remove : ", item.name)
+    dispatch(removeItem({name: item.name}));
   };
 
   const handleClearCart = () => {
