@@ -324,7 +324,9 @@ function ProductList() {
         <div className="product-grid">
           {plantsArray.map((category, index) => (
             <div key={index}>
-              <h1 className="product-category"><div>{category.category}</div></h1>
+              <div align="center">
+                <h1><div className="product-category">{category.category}</div></h1>
+              </div>
               <div className="product-list">
                 {category.plants.map((plant, plantIndex) => (
                   <div className="product-card" key={plantIndex}>
@@ -333,9 +335,7 @@ function ProductList() {
                     {/*Similarly like the above plant.name show other details like description and cost*/}
                     <div className="product-description">{plant.description}</div>
                     <button 
-                      // className={itemAdded ? "product-button added-to-cart" : "product-button"} 
                       className={(plant.name in addedToCart) ? "product-button added-to-cart" : "product-button"} 
-                      // disabled={itemAdded}
                       disabled={(plant.name in addedToCart)}
                       onClick={() => handleAddToCart(plant)}
                       >Add to Cart</button>
