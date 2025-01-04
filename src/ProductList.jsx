@@ -255,24 +255,19 @@ function ProductList() {
   };
 
   const handleContinueShopping = (e) => {
-    console.log("ProductList.handlecContinueShopping ===>")
-    setShowPlants(true);
+    // console.log("ProductList.handlecContinueShopping ===>")
     setShowCart(false);
   };
 
   const [addedToCart, setAddedToCart] = useState({});
-  const [itemAdded, setItemAdded] = useState(false);
 
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
-    setItemAdded(true);
     setAddedToCart((prevState) => ({
        ...prevState,
        [product.name]: true, // Set the product name as key and value as true to indicate it's added to cart
      }));
   };
-
-  const itemCount = useSelector(state => state.cart.totalQuantity);
 
   // Get total quantity for all items
   const getTotalQuantity = (item) => {

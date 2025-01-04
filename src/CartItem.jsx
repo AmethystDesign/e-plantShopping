@@ -6,8 +6,6 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
-  const [showCart, setShowCart] = useState(true); 
-  const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
   
   // Option 1: 
   // const totalAmount = cart.reduce((total, item) => total + Number(item.cost.substring(1)) * item.quantity, 0);
@@ -23,9 +21,8 @@ const CartItem = ({ onContinueShopping }) => {
   const totalAmount2 = useSelector(state => state.cart.totalCost);
 
   const handleContinueShopping = (e) => {
-    console.log("CartItem.handlecContinueShopping ===>")
-    e.preventDefault();
-    setShowCart(false);
+    // console.log("CartItem.handlecContinueShopping ===>")
+    onContinueShopping(e);
   };
 
   const handleCheckoutShopping = (e) => {
