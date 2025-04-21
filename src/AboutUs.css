@@ -14,10 +14,11 @@
   }
   
   .about-us-description {
-    font-size: 18px;
+    font-size: 24px;
     color: #666;
     margin-bottom: 30px;
     text-align: center;
+    font-weight: bold;
   }
   
   .about-us-content {
